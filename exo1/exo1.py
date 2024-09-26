@@ -19,4 +19,3 @@ class Item:
     
 
 i = Item(10, 20)
-i.afficher()

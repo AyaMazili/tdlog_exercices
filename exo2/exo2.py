@@ -1,30 +1,46 @@
-"""
-Complete the solution so that it returns true if the first argument(string)
-passed in ends with the 2nd argument (also a string).
+import unittest
 
-Examples:
+class Word:
+    def __init__(self, word):
+        self.word = word
 
-    solution('abc', 'bc') # returns true
-    solution('abc', 'd') # returns false
-"""
+    def solution(self, ending):
+        return self.word.endswith(ending)
 
-"""
-Create unit test using those cases:
-fixed_tests_True = (
-    ( "samurai", "ai"    ),
-    ( "ninja",   "ja"    ),
-    ( "sensei",  "i"     ),
-    ( "abc",     "abc"   ),
-    ( "abcabc",  "bc"    ),
-    ( "fails",   "ails"  ),
-)
+# Créer les tests unitaires
+class TestWordSolution(unittest.TestCase):
 
-fixed_tests_False = (
-    ( "sumo",    "omo"   ),
-    ( "samurai", "ra"    ),
-    ( "abc",     "abcd"  ),
-    ( "ails",    "fails" ),
-    ( "this",    "fails" ),
-    ( "spam",    "eggs"  )
-)
-"""
+    def test_fixed_tests_true(self):
+        fixed_tests_True = (
+            ("samurai", "ai"),
+            ("ninja", "ja"),
+            ("sensei", "i"),
+            ("abc", "abc"),
+            ("abcabc", "bc"),
+            ("fails", "ails"),
+        )
+
+        for string, ending in fixed_tests_True:
+            word_obj = Word(string)
+            with self.subTest(f"{string} ends with {ending}"):
+                self.assertTrue(word_obj.solution(ending))
+
+    def test_fixed_tests_false(self):
+        fixed_tests_False = (
+            ("sumo", "omo"),
+            ("samurai", "ra"),
+            ("abc", "abcd"),
+            ("ails", "fails"),
+            ("this", "fails"),
+            ("spam", "eggs"),
+        )
+
+        for string, ending in fixed_tests_False:
+            word_obj = Word(string)
+            with self.subTest(f"{string} does not end with {ending}"):
+                self.assertFalse(word_obj.solution(ending))
+
+
+# Exécuter les tests
+if __name__ == "__main__":
+    unittest.main()
